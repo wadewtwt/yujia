@@ -1,11 +1,16 @@
 <?php
 namespace app\admin\controller;
 
-use app\admin\controller\Common;
+use think\Loader;
 
 class User extends Common{
     public function index(){
-        echo 34333333333333333333;
+        $info = db('user')
+            ->where('status',0)
+            ->order('id desc')
+            ->select();
+
+        $this->assign('info', $info);
         return $this->fetch();
     }
 }

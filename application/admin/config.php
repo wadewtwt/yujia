@@ -10,7 +10,8 @@
 // +----------------------------------------------------------------------
 
 return [
-    '__IMG__'      => '/static/admin/img',
-    '__JS__'       => '/static/admin/js',
-    '__CSS__'      => '/static/admin/css',
+    // 视图输出字符串内容替换
+    'view_replace_str'       => [
+//        '__CSS__' => '/static/admin/css'
+    ],
 ];

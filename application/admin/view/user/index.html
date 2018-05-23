@@ -54,16 +54,27 @@
                                                 colspan="1" aria-label="CSS grade: activate to sort column ascending">
                                                 手机
                                             </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="CSS grade: activate to sort column ascending">
+                                                操作
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 1.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td>1.7</td>
-                                            <td>A</td>
-                                        </tr>
+
+                                        {volist name="info" id="vo"}
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">{$vo.name}</td>
+                                                <td><img src="{$vo.avatar}" style="width: 50px;height: 50px;"> </td>
+                                                <td>{$vo.create_time}</td>
+                                                <td>{$vo.sex}</td>
+                                                <td>{$vo.phone}</td>
+                                                <td>
+                                                    <a href="" class="btn btn-default">编辑</a>
+                                                    <a href="" class="btn btn-info">新增</a>
+                                                </td>
+                                            </tr>
+                                        {/volist}
                                         </tbody>
                                         <tfoot>
                                         </tfoot>

@@ -1,4 +1,5 @@
 {include file="common/head" /}
+
 <div class="content-wrapper">
 
     <section class="content">
@@ -20,109 +21,40 @@
                     </form>
                     </nav>
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <div id="example2_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6"></div>
-                                <div class="col-sm-12 col-md-6"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
-                                           aria-describedby="example2_info">
-                                        <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending">
-                                                用户名
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Browser: activate to sort column ascending">
-                                                头像
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                添加时间
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Engine version: activate to sort column ascending">Engine
-                                                性别
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="CSS grade: activate to sort column ascending">
-                                                手机
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="CSS grade: activate to sort column ascending">
-                                                操作
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>头像</th>
+                            <th>添加时间</th>
+                            <th>性别</th>
+                            <th>手机</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                                        {volist name="info" id="vo"}
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">{$vo.name}</td>
-                                                <td><img src="{$vo.avatar}" style="width: 50px;height: 50px;"> </td>
-                                                <td>{$vo.create_time}</td>
-                                                <td>{$vo.sex}</td>
-                                                <td>{$vo.phone}</td>
-                                                <td>
-                                                    <a href="" class="btn btn-default">编辑</a>
-                                                    <a href="" class="btn btn-info">新增</a>
-                                                </td>
-                                            </tr>
-                                        {/volist}
-                                        </tbody>
-                                        <tfoot>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-5">
-
-                                </div>
-                                <div class="col-sm-12 col-md-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                                        <ul class="pagination">
-                                            <li class="paginate_button page-item previous disabled"
-                                                id="example2_previous">
-                                                <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
-                                                   class="page-link">Previous</a>
-                                            </li>
-                                            <li class="paginate_button page-item active">
-                                                <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0"
-                                                   class="page-link">1</a></li>
-                                            <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                                                                      data-dt-idx="2" tabindex="0"
-                                                                                      class="page-link">2</a></li>
-                                            <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                                                                      data-dt-idx="3" tabindex="0"
-                                                                                      class="page-link">3</a></li>
-                                            <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                                                                      data-dt-idx="4" tabindex="0"
-                                                                                      class="page-link">4</a></li>
-                                            <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                                                                      data-dt-idx="5" tabindex="0"
-                                                                                      class="page-link">5</a></li>
-                                            <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                                                                      data-dt-idx="6" tabindex="0"
-                                                                                      class="page-link">6</a></li>
-                                            <li class="paginate_button page-item next" id="example2_next"><a href="#"
-                                                                                                             aria-controls="example2"
-                                                                                                             data-dt-idx="7"
-                                                                                                             tabindex="0"
-                                                                                                             class="page-link">Next</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        {volist name="info" id="vo"}
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td><img src="{$vo.avatar}" style="width: 50px;height: 50px;"></td>
+                            <td>{$vo.create_time}</td>
+                            <td>{$vo.sex}</td>
+                            <td>{$vo.phone}</td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-primary">修改密码</a>
+                                <a href="/admin/user/update/id/2.html" class="btn btn-sm btn-default">编辑</a>
+                                <a href="" class="btn btn-sm btn-info">新增</a>
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -134,3 +66,4 @@
 </div>
 
 {include file="common/foot" /}
+

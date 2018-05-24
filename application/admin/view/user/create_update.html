@@ -1,0 +1,44 @@
+{include file="common/head" /}
+<div class="content-wrapper">
+    <div class="page-container">
+        <div class="row cl col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">修改</h3>
+                </div>
+
+                <!-- form start -->
+                <form role="form" action="" method="post" id="form-article-add">
+                    <div class="card-body">
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">名称</label>
+                            <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">性别</label>
+                            <input type="text" class="form-control" name="sex" placeholder="">
+                        </div>
+
+                        <div class="form-check col-md-12">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">显示</label>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">提交修改</button>
+                        <button type="submit" class="btn btn-primary">返回</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--这边添加提交的链接-->
+<if condition="$addAction eq 1">
+    <input type="hidden" class="add_edit" value="/admin/user/edit/id/1.html">
+    <else/>
+    <input type="hidden" class="add_edit" value="/admin/user/edit/id/2.html">
+</if>

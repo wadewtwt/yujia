@@ -1,34 +1,127 @@
 {include file="common/head" /}
+
 <div class="content-wrapper">
     <div class="page-container">
         <div class="row cl col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">修改</h3>
+                    <h3 class="card-title">{$action['title']}</h3>
                 </div>
 
                 <!-- form start -->
-                <form role="form" action="" method="post" id="form-article-add">
+                <form role="form" id="form-article-add">
                     <div class="card-body">
-
+                        <input type="hidden" value="{$info.id|default=''}" id="edit_id" name="id">
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">名称</label>
-                            <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="">
+                            <input type="text" class="form-control" name="name" value="{$info.name|default=''}" id="exampleInputEmail1" placeholder="">
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">性别</label>
-                            <input type="text" class="form-control" name="sex" placeholder="">
+                            <label for="exampleInputEmail1">职位</label>
+                            <input type="text" class="form-control" name="position" value="{$info.position|default=''}" id="exampleInputEmail1" placeholder="">
                         </div>
 
-                        <div class="form-check col-md-12">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">显示</label>
+                        <div class="form-group col-md-12">
+                            <label>性别</label>
+                            <select class="form-control" name="sex">
+                                {if condition="isset($info.sex) eq ''"}
+                                <option value="0" >未知</option>
+                                <option value="10" >男</option>
+                                <option value="20" >女</option>
+                                {else /}
+                                <option value="0" {if condition="$info.sex eq 0"}selected{/if}>未知</option>
+                                <option value="10" {if condition="$info['sex'] eq 10"}selected{/if}>男</option>
+                                <option value="20" {if condition="$info['sex'] eq 20"}selected{/if}>女</option>
+                                {/if}
+
+                            </select>
                         </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1" class="col-md-12">头像</label>
+                            <div class="formControls col-xs-6 col-sm-8">
+                                <input type="file" value="" onchange="uploadImg(this,'/admin/Upload/upload.html')"/>
+                                <input type="hidden" value="{$info.avatar|default=''}" id="npic" name="avatar">
+                            </div>
+                            <div class="formControls col-xs-6 col-sm-8 img">
+                                <img id="uploadImgPath" src="{$info.avatar|default=''}" style="width: 100px;height: 100px;">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">手机</label>
+                            <input type="text" class="form-control" name="phone" value="{$info.phone|default=''}"  placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">生日</label>
+                            <input type="text" class="form-control" name="birthday" value="{$info.birthday|default=''}" id="test1" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label>籍贯</label>
+                            <select class="form-control" name="area_id">
+                                {if condition="isset($info.areaProvince) eq ''"}
+                                    {volist name="areaProvince" id="vo"}
+                                    <option value="{$vo.id}">{$vo.area_name}</option>
+                                    {/volist}
+                                {else /}
+                                    {volist name="areaProvince" id="vo"}
+                                    <option value="{$vo.id}" {if condition="$vo.id eq $info['area_id']"}selected{/if}>{$vo.area_name}</option>
+                                    {/volist}
+                                {/if}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">毕业院校</label>
+                            <input type="text" class="form-control" name="college" value="{$info.college|default=''}"  placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">专业</label>
+                            <input type="text" class="form-control" name="major" value="{$info.major|default=''}"  placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label>优势特长</label>
+                            <textarea class="form-control" name="speciality" rows="3" placeholder="Enter ...">{$info.speciality|default=''}</textarea>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label>
+                                技能水平 【以“+”分隔】
+                            </label>
+                            <textarea class="form-control" name="skill" rows="3" placeholder="Enter ...">{$info.skill|default=''}</textarea>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1" class="col-md-12">背景图</label>
+                            <div class="formControls col-xs-6 col-sm-8">
+                                <input type="file" value="" onchange="uploadImg(this,'/admin/Upload/upload.html')"/>
+                                <input type="hidden" value="{$info.background|default=''}" id="npic" name="background">
+                            </div>
+                            <div class="formControls col-xs-6 col-sm-8 img">
+                                <img id="uploadImgPath" src="{$info.background|default=''}" style="width: 100px;height: 100px;">
+                            </div>
+                        </div>
+{$info.recommend}
+                        <div class="form-group">
+                            <div class="form-check">
+                                {if condition="isset($info.recommend) eq ''"}
+                                <input class="form-check-input" type="checkbox" name="recommend" value="1">
+                                {else /}
+                                <input class="form-check-input" type="checkbox" name="recommend" {if condition="$info.recommend eq 1"}checked{else/}selected{/if} value="1">
+                                {/if}
+                                <label class="form-check-label">推荐</label>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">提交修改</button>
+                        <a href="javascript:;"  class="btn btn-primary" onclick="submit()">提交</a>
                         <button type="submit" class="btn btn-primary">返回</button>
                     </div>
                 </form>
@@ -37,8 +130,17 @@
     </div>
 </div>
 <!--这边添加提交的链接-->
-<if condition="$addAction eq 1">
-    <input type="hidden" class="add_edit" value="/admin/user/edit/id/1.html">
-    <else/>
-    <input type="hidden" class="add_edit" value="/admin/user/edit/id/2.html">
-</if>
+
+<input type="hidden" class="add_edit" value="{:url($action['url'])}">
+
+{include file="common/foot" /}
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
+    });
+</script>

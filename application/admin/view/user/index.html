@@ -1,24 +1,22 @@
 {include file="common/head" /}
-
+{include file="common/side" /}
 <div class="content-wrapper">
-
     <section class="content">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom">
-                    <!-- SEARCH FORM -->
-                    <form class="form-inline ml-3">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
+                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
+                        <form class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-
-                    </form>
+                        </form>
+                        <a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='update_create("新增","{:url('create')}")'>新增</a>
                     </nav>
                     <!-- /.card-header -->
                     <table class="layui-table">
@@ -34,6 +32,7 @@
                             <th>添加时间</th>
                             <th>性别</th>
                             <th>手机</th>
+                            <th>推荐</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -44,12 +43,17 @@
                             <td>{$vo.name}</td>
                             <td><img src="{$vo.avatar}" style="width: 50px;height: 50px;"></td>
                             <td>{$vo.create_time}</td>
-                            <td>{$vo.sex}</td>
+                            <td>
+                                {if condition=" $vo['sex'] eq 10"}男
+                                {elseif condition=" $vo['sex'] eq 20" /}女
+                                {else /}未知
+                                {/if}
+                            </td>
                             <td>{$vo.phone}</td>
+                            <td>{if condition="$vo.recommend eq 1"}是{else/}否{/if}</td>
                             <td>
                                 <a href="" class="btn btn-sm btn-primary">修改密码</a>
-                                <a href="/admin/user/update/id/2.html" class="btn btn-sm btn-default">编辑</a>
-                                <a href="" class="btn btn-sm btn-info">新增</a>
+                                <a href="javascript:;" class="btn btn-sm btn-default" onClick='update_create("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
                             </td>
                         </tr>
                         {/volist}
@@ -67,3 +71,8 @@
 
 {include file="common/foot" /}
 
+<script>
+    function update_create(title, url, w, h) {
+        layer_show(title, url, w, h);
+    };
+</script>

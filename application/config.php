@@ -241,4 +241,11 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    // 七牛云
+    'qiniu' => [
+        'accesskey' => 'HeIFg7K5mySVpKTX1vfhko70qS-7dDrVHsU3LuC0',
+        'secretkey' => 'OZBKRi6xDxLmiq0IIjuZV_tr-UXUNyPqZpsasfh_',
+        'bucket' => 'moreshine',
+        'domain'=>'http://p11bmws2p.bkt.clouddn.com',
+    ]
 ];

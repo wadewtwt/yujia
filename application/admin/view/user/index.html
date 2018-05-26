@@ -16,7 +16,7 @@
                                 </div>
                             </div>
                         </form>
-                        <a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='update_create("新增","{:url('create')}")'>新增</a>
+                        <a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>
                     </nav>
                     <!-- /.card-header -->
                     <table class="layui-table">
@@ -52,8 +52,8 @@
                             <td>{$vo.phone}</td>
                             <td>{if condition="$vo.recommend eq 1"}是{else/}否{/if}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-primary">修改密码</a>
-                                <a href="javascript:;" class="btn btn-sm btn-default" onClick='update_create("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
+                                <a href="javascript:;" class="btn btn-sm btn-primary" onClick='layer_show("修改","{:url('update_password',"id=$vo[id]")}")'>修改密码</a>
+                                <a href="javascript:;" class="btn btn-sm btn-default" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
                             </td>
                         </tr>
                         {/volist}
@@ -70,9 +70,3 @@
 </div>
 
 {include file="common/foot" /}
-
-<script>
-    function update_create(title, url, w, h) {
-        layer_show(title, url, w, h);
-    };
-</script>

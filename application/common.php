@@ -8,11 +8,12 @@
 // +----------------------------------------------------------------------
 // | Author: 流年 <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-
+use think\Config;
 // 应用公共文件
 // 修改用户密码
 function userEncrypt($data){
-    return md5($data."yujia");
+    $str = Config::get('project_name');
+    return md5($data.$str);
 }
 
 // 返回json信息

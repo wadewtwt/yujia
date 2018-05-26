@@ -1,0 +1,94 @@
+{include file="common/head" /}
+{include file="common/side" /}
+<style>
+    .pagelist {padding:10px 0; text-align:center;}
+    .pagelist span,.pagelist a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+    .pagelist a{ margin:0 3px;}
+    .pagelist span.current{ background:#09F; color:#FFF; border-color:#09F; margin:0 2px;}
+    .pagelist a:hover{background:#09F; color:#FFF; border-color:#09F; }
+    .pagelist label{ padding-left:15px; color:#999;}
+    .pagelist label b{color:red; font-weight:normal; margin:0 3px;}
+</style>
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
+                        <form class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!--<a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>-->
+                    </nav>
+                    <!-- /.card-header -->
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>学校</th>
+                            <th>专业</th>
+                            <th>学历</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {volist name="info" id="vo"}
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.college}</td>
+                            <td>{$vo.major}</td>
+                            <td>
+                                {if condition=" $vo['education'] eq 10"}高中
+                                {elseif condition=" $vo['education'] eq 20" /}大专
+                                {elseif condition=" $vo['education'] eq 30" /}本科及以上
+                                {/if}
+                            </td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-sm btn-default" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
+                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick='confirmDel("{:url('del',"id=$vo[id]")}")'>删除</a>
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <div class="pagelist" style="width: 40%;margin: 0 auto"> {$page}</div>
+
+</div>
+
+
+
+
+
+{include file="common/foot" /}
+<script>
+    function confirmDel(url){
+
+        layer.alert('',{
+            icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
+            location.href=url;
+            layer.close(index);
+        });
+    }
+</script>

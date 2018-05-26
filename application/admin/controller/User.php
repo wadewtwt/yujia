@@ -11,6 +11,7 @@ class User extends Common{
 
         $info = db('user')
             ->order('id desc')
+            ->field('id,name,avatar,create_time,sex,phone,recommend')
             ->select();
         $this->assign('info', $info);
         return $this->fetch();
@@ -73,4 +74,5 @@ class User extends Common{
 
         return $this->fetch();
     }
+
 }

@@ -1,0 +1,71 @@
+{include file="common/head" /}
+<div class="content-wrapper">
+    <div class="page-container">
+        <div class="row cl col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">{$action['title']}</h3>
+                </div>
+
+                <!-- form start -->
+                <form role="form" id="form-article-add">
+
+                    <div class="card-body">
+                        <input type="hidden" value="{$info.id|default=''}" id="edit_id" name="id">
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">时间</label>
+                            <input type="text" class="form-control" name="begin_time" style="width: 40%;display: inline" value="{$info.begin_time|default=''}" id="edu1" placeholder="开始时间">
+                            <input type="text" class="form-control" name="end_time" style="width: 40%;display: inline" value="{$info.end_time|default=''}" id="edu2" placeholder="结束时间">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="exampleInputEmail1">毕业院校</label>
+                            <input type="text" class="form-control" name="college" value="{$info.college|default=''}"  placeholder="">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="exampleInputEmail1">专业</label>
+                            <input type="text" class="form-control" name="major" value="{$info.major|default=''}"  placeholder="">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>文凭</label>
+                            <select class="form-control" name="education">
+                                {if condition="isset($info.education) eq ''"}
+                                <option value="10">高中</option>
+                                <option value="20">大专</option>
+                                <option value="30">本科及以上</option>
+                                {else /}
+                                <option value="10" {if condition="$info['education'] eq 10"}selected{/if}>高中</option>
+                                <option value="20" {if condition="$info['education'] eq 20"}selected{/if}>大专</option>
+                                <option value="30" {if condition="$info['education'] eq 30"}selected{/if}>本科及以上</option>
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <a href="javascript:;"  class="btn btn-primary" onclick="submit()">提交</a>
+                        <button type="submit" class="btn btn-primary" onclick="layer_close()">返回</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--这边添加提交的链接-->
+
+<input type="hidden" class="add_edit" value="{:url($action['url'])}">
+
+{include file="common/foot" /}
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#edu1', //指定元素
+        });
+        laydate.render({
+            elem: '#edu2', //指定元素
+        });
+    });
+</script>

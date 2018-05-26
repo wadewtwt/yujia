@@ -243,8 +243,8 @@ return [
     ],
     // 七牛云
     'qiniu' => [
-        'accesskey' => 'HeIFg7K5mySVpKTX1vfhko70qS-7dDrVHsU3LuC0',
-        'secretkey' => 'OZBKRi6xDxLmiq0IIjuZV_tr-UXUNyPqZpsasfh_',
+        'accesskey' => '111',
+        'secretkey' => '222',
         'bucket' => 'moreshine',
         'domain'=>'http://p11bmws2p.bkt.clouddn.com',
     ]

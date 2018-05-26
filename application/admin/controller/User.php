@@ -21,17 +21,9 @@ class User extends Common{
         if(request()->isPost()){
             $data = Request::instance()->post();
             $data['recommend'] = isset($_POST['recommend'])?:0;
+            $res = model('User')->allowField(true)->save($data,['id'=>$data['id']]);
 
-            $res = db('user')
-                ->where('id', $data['id'])
-                ->update($data);
-            if($res){
-                echo json_encode(array('err_msg'=>'修改成功','err_code'=>200,'success'=>'success'));
-                exit();
-            }else{
-                echo json_encode(array('err_msg'=>'修改失败','err_code'=>200,'success'=>'error'));
-                exit();
-            }
+            returnJson($res);
         }
         // 查出该信息
         $id = input('id');
@@ -53,15 +45,9 @@ class User extends Common{
             $data = Request::instance()->post();
             $data['recommend'] = isset($_POST['recommend'])?:0;
             $data['create_time'] = date('Y-m-d H:i:s');
-            $res = db('user')
-                ->insert($data);
-            if($res){
-                echo json_encode(array('err_msg'=>'新增成功','err_code'=>200,'success'=>'success'));
-                exit();
-            }else{
-                echo json_encode(array('err_msg'=>'新增失败','err_code'=>200,'success'=>'error'));
-                exit();
-            }
+            $res = model('User')->allowField(true)->save($data);
+
+            returnJson($res);
         }
         // 地区
         $areaProvince =  Db::query('select id,area_name from area where id%10000=0');
@@ -77,23 +63,13 @@ class User extends Common{
     public function update_password(){
         if(request()->isPost()){
             $data = Request::instance()->post();
-            $data['recommend'] = isset($_POST['recommend'])?:0;
+            $data['password'] = userEncrypt($data['password']);
+            $res = model('User')->allowField(true)->save($data,['id'=>$data['id']]);
 
-            $res = db('user')
-                ->where('id', $data['id'])
-                ->update($data);
-            if($res){
-                echo json_encode(array('err_msg'=>'修改成功','err_code'=>200,'success'=>'success'));
-                exit();
-            }else{
-                echo json_encode(array('err_msg'=>'修改失败','err_code'=>200,'success'=>'error'));
-                exit();
-            }
+            returnJson($res);
         }
-        // 查出该信息
         $id = input('id');
-        $info = Db('user')->where('id',$id)->column('id');
-        $this->assign('info',$info);
+        $this->assign('id',$id);
 
         return $this->fetch();
     }

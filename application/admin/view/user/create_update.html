@@ -18,7 +18,7 @@
 
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">职位</label>
-                            <input type="text" class="form-control" name="position" value="{$info.position|default=''}" id="exampleInputEmail1" placeholder="">
+                            <input type="text" class="form-control" name="position" value="{$info.position|default=''}" placeholder="">
                         </div>
 
                         <div class="form-group col-md-12">
@@ -136,7 +136,7 @@
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <a href="javascript:;"  class="btn btn-primary" onclick="submit()">提交</a>
-                        <button type="submit" class="btn btn-primary">返回</button>
+                        <button type="submit" class="btn btn-primary" onclick="layer_close()">返回</button>
                     </div>
                 </form>
             </div>

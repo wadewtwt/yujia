@@ -1,6 +1,5 @@
 {include file="common/head" /}
 {include file="common/side" /}
-
 <div class="content-wrapper">
     <section class="content">
         <div class="row">
@@ -9,7 +8,7 @@
                     <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
                         <form class="form-inline ml-3" action="" method="post">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="专业" name="major" aria-label="Search">
+                                <input class="form-control form-control-navbar" type="search" name="title" placeholder="荣誉名称" aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fa fa-search"></i>
@@ -17,7 +16,7 @@
                                 </div>
                             </div>
                         </form>
-                        <!--<a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>-->
+
                     </nav>
                     <!-- /.card-header -->
                     <table class="layui-table">
@@ -29,9 +28,9 @@
                         <thead>
                         <tr>
                             <th>用户名</th>
-                            <th>学校</th>
-                            <th>专业</th>
-                            <th>学历</th>
+                            <th>荣誉名称</th>
+                            <th>获得时间</th>
+                            <th>图片</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -40,14 +39,9 @@
                         {volist name="info" id="vo"}
                         <tr>
                             <td>{$vo.name}</td>
-                            <td>{$vo.college}</td>
-                            <td>{$vo.major}</td>
-                            <td>
-                                {if condition=" $vo['education'] eq 10"}高中
-                                {elseif condition=" $vo['education'] eq 20" /}大专
-                                {elseif condition=" $vo['education'] eq 30" /}本科及以上
-                                {/if}
-                            </td>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.time}</td>
+                            <td><img src="{$vo.pic}" style="width: 50px;height: 50px;"></td>
                             <td>
                                 <a href="javascript:;" class="btn btn-sm btn-default" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
                                 <a href="javascript:;" class="btn btn-sm btn-danger" onclick='confirmDel("{:url('del',"id=$vo[id]")}")'>删除</a>
@@ -68,12 +62,3 @@
 </div>
 
 {include file="common/foot" /}
-<script>
-    function confirmDel(url){
-        layer.alert('',{
-            icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
-            location.href=url;
-            layer.close(index);
-        });
-    }
-</script>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-05-26 17:16:03
+Date: 2018-05-28 18:12:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,14 +26,15 @@ CREATE TABLE `admin` (
   `ip` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '127.0.0.1', '2018-05-23 13:38:30', '2018-05-26 15:23:36');
-INSERT INTO `admin` VALUES ('2', 'admin2', 'e10adc3949ba59abbe56e057f20f883e', null, null, null);
+INSERT INTO `admin` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '127.0.0.1', '2018-05-23 13:38:30', '2018-05-28 13:40:19', null);
+INSERT INTO `admin` VALUES ('2', 'admin2', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for area
@@ -3583,7 +3584,7 @@ CREATE TABLE `education` (
 -- ----------------------------
 INSERT INTO `education` VALUES ('1', '8', '2018-05-16', '2018-05-26', '复旦大学', '金融', '10', '2018-05-16 12:57:50');
 INSERT INTO `education` VALUES ('2', '8', '2018-03-01', '2018-05-01', '东南高中1', '理财1', '30', '2018-05-26 12:57:55');
-INSERT INTO `education` VALUES ('6', '8', null, null, null, null, '0', null);
+INSERT INTO `education` VALUES ('6', '8', '2018-05-01', '2018-05-11', 'tyfjcvj1', 'utfjvk1', '30', null);
 INSERT INTO `education` VALUES ('9', '8', null, null, null, null, '0', null);
 INSERT INTO `education` VALUES ('10', '8', null, null, null, null, '0', null);
 INSERT INTO `education` VALUES ('5', '8', null, null, null, null, '0', null);
@@ -3597,15 +3598,18 @@ DROP TABLE IF EXISTS `honor`;
 CREATE TABLE `honor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `time` datetime DEFAULT NULL,
+  `time` varchar(100) DEFAULT NULL,
   `pic` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of honor
 -- ----------------------------
+INSERT INTO `honor` VALUES ('3', '高级导师', '2018-05-08', 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805280949322078.tmp', '8', '2018-06-01 09:40:17');
+INSERT INTO `honor` VALUES ('4', '中级导师', null, null, '8', null);
 
 -- ----------------------------
 -- Table structure for keywords
@@ -3615,12 +3619,30 @@ CREATE TABLE `keywords` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
+  `recommend` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of keywords
 -- ----------------------------
+INSERT INTO `keywords` VALUES ('1', '自由', '2018-05-28 11:17:44', '1');
+INSERT INTO `keywords` VALUES ('2', '向上', '2018-06-06 11:17:41', null);
+INSERT INTO `keywords` VALUES ('3', '阳光', '2018-05-03 11:17:47', '1');
+INSERT INTO `keywords` VALUES ('4', '健康12', '2018-05-19 11:17:54', null);
+INSERT INTO `keywords` VALUES ('5', '绿色', '2018-05-09 11:17:50', '1');
+INSERT INTO `keywords` VALUES ('6', '无限光明1', null, null);
+INSERT INTO `keywords` VALUES ('7', '友好', '2018-05-28 11:38:48', '1');
+INSERT INTO `keywords` VALUES ('8', '友好2', '2018-05-28 11:40:14', null);
+INSERT INTO `keywords` VALUES ('9', '德玛西亚', '2018-05-28 11:45:51', '1');
+INSERT INTO `keywords` VALUES ('10', '宫本武藏', '2018-05-28 11:46:47', '1');
+INSERT INTO `keywords` VALUES ('11', '孙尚香', '2018-05-28 11:47:26', '1');
+INSERT INTO `keywords` VALUES ('12', '长跑', '2018-05-28 11:50:49', '1');
+INSERT INTO `keywords` VALUES ('13', '有氧呼吸', '2018-05-28 11:58:28', null);
+INSERT INTO `keywords` VALUES ('14', '慢跑', '2018-05-28 11:58:51', '1');
+INSERT INTO `keywords` VALUES ('15', '慢跑', '2018-05-28 11:59:32', null);
+INSERT INTO `keywords` VALUES ('16', '无氧呼吸', '2018-05-28 12:44:28', '1');
+INSERT INTO `keywords` VALUES ('18', null, null, '1');
 
 -- ----------------------------
 -- Table structure for keywords_user
@@ -3631,11 +3653,21 @@ CREATE TABLE `keywords_user` (
   `user_id` int(11) DEFAULT NULL,
   `keywords_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of keywords_user
 -- ----------------------------
+INSERT INTO `keywords_user` VALUES ('1', '8', '1');
+INSERT INTO `keywords_user` VALUES ('2', '8', '2');
+INSERT INTO `keywords_user` VALUES ('3', '4', '3');
+INSERT INTO `keywords_user` VALUES ('4', '3', '4');
+INSERT INTO `keywords_user` VALUES ('5', null, '5');
+INSERT INTO `keywords_user` VALUES ('6', null, '6');
+INSERT INTO `keywords_user` VALUES ('7', null, '3');
+INSERT INTO `keywords_user` VALUES ('8', null, '12');
+INSERT INTO `keywords_user` VALUES ('9', null, '13');
+INSERT INTO `keywords_user` VALUES ('10', null, '17');
 
 -- ----------------------------
 -- Table structure for practice
@@ -3648,12 +3680,15 @@ CREATE TABLE `practice` (
   `position` varchar(255) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of practice
 -- ----------------------------
+INSERT INTO `practice` VALUES ('2', '2018-05-02', '2018-05-12', '形体老师1', '上海形体公司1', '2018-05-23 09:10:20', '8');
+INSERT INTO `practice` VALUES ('3', null, null, '瑜伽老师', '上海瑜伽公司', '2018-05-03 09:31:00', '8');
 
 -- ----------------------------
 -- Table structure for recommend
@@ -3678,7 +3713,6 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL COMMENT '用户名',
-  `position` varchar(100) DEFAULT NULL COMMENT '职位',
   `user_name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
   `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
@@ -3703,11 +3737,11 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '詹姆斯1', '高级导师', null, 'e10adc3949ba59abbe56e057f20f883e', 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251522483885.tmp', '0', '13655555555', '2009-05-23 17:14:43', '110000', '本科', '江苏大学', '打球', '打算发电机发电思考', '技能11+技能22', '2018-05-23 16:57:55', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251731207792.tmp', '0', 'z', '1');
-INSERT INTO `user` VALUES ('2', '科比2', '中级导师2', null, 'e10adc3949ba59abbe56e057f20f883e', 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251824586933.tmp', '10', '18622222222', '2018-05-02', '120000', '大专', '上海大学2', '踢毽子2', '冯德富来得及答复2', '2', '2018-05-23 16:58:32', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251825172395.tmp', '0', 'k', '0');
-INSERT INTO `user` VALUES ('3', '杜兰特', '小道士', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251838077221.tmp', '20', '1586666666', '2018-05-06', '420000', '20', '湖北工业大学', '挖煤', '11', '222', '2018-05-25 00:00:00', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251838333179.tmp', '0', null, '1');
-INSERT INTO `user` VALUES ('4', '哈登', '前锋', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261023492782.tmp', '10', '18633333333', '2018-05-03', '230000', '20', '麻省理工', '金融', '打篮球', '打球+吹牛逼+打游戏', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261024359965.tmp', '0', null, '1');
-INSERT INTO `user` VALUES ('5', '', '', null, null, '', '0', '', '', '110000', '10', '', '', '', '', '2018-05-25 00:00:00', null, '', '0', null, '0');
-INSERT INTO `user` VALUES ('6', '', '', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251856381340.tmp', '0', '', '', '110000', '10', '', '', '', '', '2018-05-25 18:50:12', null, '', '0', null, '0');
-INSERT INTO `user` VALUES ('7', '', '', null, null, '', '0', '', '', '110000', '10', '', '', '', '', '2018-05-25 18:58:44', null, '', '0', null, '0');
-INSERT INTO `user` VALUES ('8', '保罗', '后卫', null, '7f19c36d054c360914f33fde03a92034', 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261027178902.tmp', '10', '18911111111', '2018-05-01', '360000', '30', '东南大学', '工商管理', '有时候哈哈哈哈', '很多话+打发+发大煞风景啊', '2018-05-26 10:28:22', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261028208458.tmp', '0', null, '1');
+INSERT INTO `user` VALUES ('1', '詹姆斯1', null, 'e10adc3949ba59abbe56e057f20f883e', 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251522483885.tmp', '0', '13655555555', '2009-05-23 17:14:43', '110000', '本科', '江苏大学', '打球', '打算发电机发电思考', '技能11+技能22', '2018-05-23 16:57:55', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251731207792.tmp', '0', 'z', '1');
+INSERT INTO `user` VALUES ('2', '科比2', null, 'e10adc3949ba59abbe56e057f20f883e', 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251824586933.tmp', '10', '18622222222', '2018-05-02', '120000', '大专', '上海大学2', '踢毽子2', '冯德富来得及答复2', '2', '2018-05-23 16:58:32', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251825172395.tmp', '0', 'k', '0');
+INSERT INTO `user` VALUES ('3', '杜兰特', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251838077221.tmp', '20', '1586666666', '2018-05-06', '420000', '20', '湖北工业大学', '挖煤', '11', '222', '2018-05-25 00:00:00', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251838333179.tmp', '99', null, '1');
+INSERT INTO `user` VALUES ('4', '哈登', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261023492782.tmp', '10', '18633333333', '2018-05-03', '230000', '20', '麻省理工', '金融', '打篮球', '打球+吹牛逼+打游戏', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261024359965.tmp', '0', null, '1');
+INSERT INTO `user` VALUES ('5', '', null, null, '', '0', '', '', '110000', '10', '', '', '', '', '2018-04-01 00:00:00', null, '', '99', null, '0');
+INSERT INTO `user` VALUES ('6', '', null, null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805251856381340.tmp', '0', '', '', '110000', '10', '', '', '', '', '2018-05-25 18:50:12', null, '', '99', null, '0');
+INSERT INTO `user` VALUES ('7', '', null, null, '', '0', '', '', '110000', '10', '', '', '', '', '2018-05-25 18:58:44', null, '', '0', null, '0');
+INSERT INTO `user` VALUES ('8', '保罗', null, '7f19c36d054c360914f33fde03a92034', 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261027178902.tmp', '10', '18911111111', '2018-05-01', '360000', '30', '东南大学', '工商管理', '有时候哈哈哈哈', '很多话+打发+发大煞风景啊', '2018-05-26 10:28:22', null, 'http://p11bmws2p.bkt.clouddn.com/2018/05/201805261028208458.tmp', '99', null, '1');

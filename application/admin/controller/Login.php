@@ -26,7 +26,6 @@ class Login extends Controller
                 $this->error('密码不正确');
             }else {
                 Session::set('login_admin',$info);
-                session('name', $info['name']);
                 //记录登录信息
                 $ip = request()->ip();
                 Db::table('admin')->where('id', $info['id'])->update([

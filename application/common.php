@@ -17,12 +17,12 @@ function userEncrypt($data){
 }
 
 // 返回json信息
-function returnJson($res){
+function returnJson($res,$title='修改'){
     if($res){
-        echo json_encode(array('err_msg'=>'修改成功','err_code'=>200,'success'=>'success'));
+        echo json_encode(array('err_msg'=>$title.'成功','err_code'=>200,'success'=>'success'));
         exit();
     }else{
-        echo json_encode(array('err_msg'=>'修改失败','err_code'=>200,'success'=>'error'));
+        echo json_encode(array('err_msg'=>$title.'失败','err_code'=>200,'success'=>'error'));
         exit();
     }
 }

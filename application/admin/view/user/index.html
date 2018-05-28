@@ -5,18 +5,29 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
-                        <form class="form-inline ml-3">
+                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom col-md-12" style="z-index: 1">
+                        <form class="form-inline ml-6 col-md-12" action="" method="post">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control form-control-navbar" name="name" type="search" placeholder="用户名" aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
                             </div>
+                            <select class="form-control col-md-2" name="recommend">
+                                <option value="">推荐与否</option>
+                                <option value="1">是</option>
+                                <option value="2">否</option>
+                            </select>
+
+                            <input type="text" class="form-control" name="begin_time" style="width:10%;display: inline" value="{$info.begin_time|default=''}" id="edu1" placeholder="开始时间">
+                            <input type="text" class="form-control" name="end_time" style="width:10%;display: inline" value="{$info.end_time|default=''}" id="edu2" placeholder="结束时间">
+                            <input type="submit" value="搜索" class="btn btn-success" style="line-height:1.5">-
+                            <button type="button" class="btn btn-block btn-outline-success btn-sm col-md-1" onClick='layer_show("新增","{:url('create')}")'>新增</button>
+
                         </form>
-                        <a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>
+
                     </nav>
                     <!-- /.card-header -->
                     <table class="layui-table">
@@ -29,7 +40,7 @@
                         <tr>
                             <th>用户名</th>
                             <th>头像</th>
-                            <th>添加时间</th>
+                            <th>注册时间</th>
                             <th>性别</th>
                             <th>手机</th>
                             <th>推荐</th>
@@ -54,6 +65,11 @@
                             <td>
                                 <a href="javascript:;" class="btn btn-sm btn-primary" onClick='layer_show("修改","{:url('update_password',"id=$vo[id]")}")'>修改密码</a>
                                 <a href="javascript:;" class="btn btn-sm btn-default" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
+                                {if condition="$vo['status'] eq 0"}
+                                <a href="javascript:;" class="btn btn-sm btn-danger" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>禁用</a>
+                                {elseif condition="$vo['status'] eq 99"}
+                                <a href="javascript:;" class="btn btn-sm btn-success" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>解禁</a>
+                                {/if}
                             </td>
                         </tr>
                         {/volist}
@@ -70,3 +86,15 @@
 </div>
 
 {include file="common/foot" /}
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#edu1', //指定元素
+        });
+        laydate.render({
+            elem: '#edu2', //指定元素
+        });
+    });
+</script>

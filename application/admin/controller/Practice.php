@@ -5,21 +5,22 @@ use app\admin\model\CommonModel;
 use think\Paginator;
 use think\Request;
 
-class Education extends Common{
+class Practice extends Common{
     // 首页
     public function index(){
         $where = [];
         if(request()->isPost()) {
-            $major = input('post.major');
-            if ($major) {
-                $where['major'] = ['like', "%$major%"];
+            $position = input('post.position');
+            if ($position) {
+                $where['position'] = ['like', "%$position%"];
             }
         }
-        $info = db('education')
+
+        $info = db('practice')
             ->alias('a')
             ->order('a.id desc')
             ->join('user b','a.user_id = b.id')
-            ->field('b.name,a.id,a.college,a.major,a.education')
+            ->field('b.name,a.id,a.position,a.company')
             ->where($where)
             ->paginate(20);
 
@@ -35,11 +36,11 @@ class Education extends Common{
     public function update(){
         if(request()->isPost()){
             $data = Request::instance()->post();
-            $res = model('Education')->allowField(true)->save($data,['id'=>$data['id']]);
+            $res = model('Practice')->allowField(true)->save($data,['id'=>$data['id']]);
             returnJson($res);
         }
         $id = input('id');
-        $info = db('education')
+        $info = db('practice')
             ->find($id);
         $this->assign('info',$info);
         // 方便url和标头
@@ -51,8 +52,8 @@ class Education extends Common{
 
     public function del(){
         $id = input('id');
-        db('education')->delete($id);
-        $this->success('删除成功', 'education/index','','1');
+        db('practice')->delete($id);
+        $this->success('删除成功', 'practice/index','','1');
     }
 
 }

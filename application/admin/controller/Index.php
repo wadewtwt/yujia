@@ -11,8 +11,10 @@ class Index extends Common
         return $this->fetch();
     }
 
-    public function lists()
+    // 退出登录
+    public function loginOut()
     {
-        return $this->fetch();
+        Session::delete('login_admin');
+        $this->success('登入成功', 'login/index','',1);
     }
 }

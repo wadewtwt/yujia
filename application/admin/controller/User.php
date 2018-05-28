@@ -8,10 +8,31 @@ use think\Request;
 class User extends Common{
     // 用户管理-首页
     public function index(){
+        $where = [];
+        if(request()->isPost()){
+            $name = input('post.name');
+            if($name){
+                $where['name'] = ['like',"%$name%"];
+            }
+            $recommend = input('post.recommend');
+            if($recommend==1){
+                $where['recommend'] = $recommend;
+            }elseif($recommend==2){
+                $where['recommend'] = 0;
+            }
 
+            $beginTime = input('post.begin_time');
+            $endTime = input('post.end_time');
+            if($beginTime && $endTime){
+                $where['create_time'] = ['between time',[$beginTime,$endTime]];
+            }
+
+
+        }
         $info = db('user')
             ->order('id desc')
-            ->field('id,name,avatar,create_time,sex,phone,recommend')
+            ->field('id,name,avatar,create_time,sex,phone,recommend,status')
+            ->where($where)
             ->select();
         $this->assign('info', $info);
         return $this->fetch();
@@ -48,7 +69,7 @@ class User extends Common{
             $data['create_time'] = date('Y-m-d H:i:s');
             $res = model('User')->allowField(true)->save($data);
 
-            returnJson($res);
+            returnJson($res,'新增');
         }
         // 地区
         $areaProvince =  Db::query('select id,area_name from area where id%10000=0');

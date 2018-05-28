@@ -1,6 +1,5 @@
 {include file="common/head" /}
 {include file="common/side" /}
-
 <div class="content-wrapper">
     <section class="content">
         <div class="row">
@@ -9,15 +8,23 @@
                     <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
                         <form class="form-inline ml-3" action="" method="post">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="专业" name="major" aria-label="Search">
+                                <input class="form-control form-control-navbar" type="search" placeholder="标签" name="title" aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
                             </div>
+                            <select class="form-control col-md-4" name="recommend">
+                                <option value="">推荐与否</option>
+                                <option value="1">是</option>
+                                <option value="2">否</option>
+                            </select>
+                            <input type="submit" value="搜索" class="btn btn-success" style="line-height:1.5">-
+                            <button type="button" class="btn btn-block btn-outline-success btn-sm col-md-1" onClick='layer_show("新增","{:url('create')}")'>新增</button>
                         </form>
-                        <!--<a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>-->
+
+
                     </nav>
                     <!-- /.card-header -->
                     <table class="layui-table">
@@ -29,9 +36,8 @@
                         <thead>
                         <tr>
                             <th>用户名</th>
-                            <th>学校</th>
-                            <th>专业</th>
-                            <th>学历</th>
+                            <th>标签</th>
+                            <th>推荐</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -39,15 +45,22 @@
 
                         {volist name="info" id="vo"}
                         <tr>
-                            <td>{$vo.name}</td>
-                            <td>{$vo.college}</td>
-                            <td>{$vo.major}</td>
                             <td>
-                                {if condition=" $vo['education'] eq 10"}高中
-                                {elseif condition=" $vo['education'] eq 20" /}大专
-                                {elseif condition=" $vo['education'] eq 30" /}本科及以上
-                                {/if}
+                                <?php
+                                 $explam = function($uid = 22){
+                                        $userInfo = db('user')->field('id,name')->where('id=0'.$uid)->find();
+                                        if($userInfo){
+                                            echo $userInfo['name'];
+                                        }else{
+                                            echo "/";
+                                        }
+                                    };
+                                 $explam($vo['user_id']);
+
+                                ?>
                             </td>
+                            <td>{$vo.title}</td>
+                            <td>{if condition="$vo['recommend'] eq 1"}<p class="text-info">是</p>{else/}<p class="text-warning">否</p>{/if}</td>
                             <td>
                                 <a href="javascript:;" class="btn btn-sm btn-default" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
                                 <a href="javascript:;" class="btn btn-sm btn-danger" onclick='confirmDel("{:url('del',"id=$vo[id]")}")'>删除</a>
@@ -68,12 +81,3 @@
 </div>
 
 {include file="common/foot" /}
-<script>
-    function confirmDel(url){
-        layer.alert('',{
-            icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
-            location.href=url;
-            layer.close(index);
-        });
-    }
-</script>

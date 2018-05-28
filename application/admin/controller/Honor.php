@@ -5,21 +5,21 @@ use app\admin\model\CommonModel;
 use think\Paginator;
 use think\Request;
 
-class Education extends Common{
+class Honor extends Common{
     // 首页
     public function index(){
         $where = [];
         if(request()->isPost()) {
-            $major = input('post.major');
-            if ($major) {
-                $where['major'] = ['like', "%$major%"];
+            $title = input('post.title');
+            if ($title) {
+                $where['title'] = ['like', "%$title%"];
             }
         }
-        $info = db('education')
+        $info = db('honor')
             ->alias('a')
             ->order('a.id desc')
             ->join('user b','a.user_id = b.id')
-            ->field('b.name,a.id,a.college,a.major,a.education')
+            ->field('b.name,a.id,a.title,a.time,a.pic')
             ->where($where)
             ->paginate(20);
 
@@ -35,11 +35,11 @@ class Education extends Common{
     public function update(){
         if(request()->isPost()){
             $data = Request::instance()->post();
-            $res = model('Education')->allowField(true)->save($data,['id'=>$data['id']]);
+            $res = model('Honor')->allowField(true)->save($data,['id'=>$data['id']]);
             returnJson($res);
         }
         $id = input('id');
-        $info = db('education')
+        $info = db('honor')
             ->find($id);
         $this->assign('info',$info);
         // 方便url和标头
@@ -51,8 +51,8 @@ class Education extends Common{
 
     public function del(){
         $id = input('id');
-        db('education')->delete($id);
-        $this->success('删除成功', 'education/index','','1');
+        db('honor')->delete($id);
+        $this->success('删除成功', 'honor/index','','1');
     }
 
 }

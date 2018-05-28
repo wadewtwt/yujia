@@ -1,0 +1,44 @@
+{include file="common/head" /}
+<div class="content-wrapper">
+    <div class="page-container">
+        <div class="row cl col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">{$action['title']}</h3>
+                </div>
+
+                <!-- form start -->
+                <form role="form" id="form-article-add">
+                    <div class="card-body">
+                        <input type="hidden" value="{$info.id|default=''}" id="edit_id" name="id">
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">标签</label>
+                            <input type="text" class="form-control" name="title" value="{$info.title|default=''}" placeholder="">
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <a href="javascript:;"  class="btn btn-primary" onclick="submit()">提交</a>
+                        <button type="submit" class="btn btn-primary" onclick="layer_close()">返回</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--这边添加提交的链接-->
+
+<input type="hidden" class="add_edit" value="{:url($action['url'])}">
+
+{include file="common/foot" /}
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1', //指定元素
+        });
+    });
+</script>

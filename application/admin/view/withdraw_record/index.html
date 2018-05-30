@@ -1,0 +1,65 @@
+{include file="common/head" /}
+{include file="common/side" /}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
+                        <form class="form-inline ml-3" action="" method="post">
+
+                        </form>
+                        <!--<a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>-->
+                    </nav>
+                    <!-- /.card-header -->
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>提现金额</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {volist name="info" id="vo"}
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.money}</td>
+                            <td>
+                                {if condition="$vo.status eq 10"}<span class="text-info ">申请中</span>
+                                {elseif condition="$vo.status eq 20"}已完成
+                                {/if}
+                            </td>
+                            <td>
+                                {if condition="$vo.status eq 10"}
+                                <a href="javascript:;" class="btn btn-sm btn-success" onclick='confirmInfo("{:url('over',"id=$vo[id]")}","确认框","确认已经完成？")'>已完成</a>
+                                {elseif condition="$vo.status eq 20"}
+                                无
+                                {else/}
+                                未知
+                                {/if}
+
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <div class="pagelist" style="width: 40%;margin: 0 auto"> {$page}</div>
+</div>
+{include file="common/foot" /}

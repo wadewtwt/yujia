@@ -1,0 +1,63 @@
+{include file="common/head" /}
+{include file="common/side" /}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
+                        <form class="form-inline ml-3" action="" method="post">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="开户行" name="title" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!--<a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>-->
+                    </nav>
+                    <!-- /.card-header -->
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>开户行</th>
+                            <th>姓名</th>
+                            <th>银行卡号</th>
+                            <th>用户名</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {volist name="info" id="vo"}
+                        <tr>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.real_name}</td>
+                            <td>{$vo.code}</td>
+                            <td>{$vo.name}</td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick='confirmDel("{:url('del',"id=$vo[id]")}")'>删除</a>
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <div class="pagelist" style="width: 40%;margin: 0 auto"> {$page}</div>
+</div>
+{include file="common/foot" /}

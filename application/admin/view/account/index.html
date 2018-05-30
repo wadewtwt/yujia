@@ -1,0 +1,56 @@
+{include file="common/head" /}
+{include file="common/side" /}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <nav class=" navbar navbar-expand bg-white navbar-light border-bottom" style="z-index: 1">
+                        <form class="form-inline ml-3" action="" method="post">
+
+                        </form>
+                        <!--<a href="javascript:;" class="btn btn-sm btn-success" style="float: right" onClick='layer_show("新增","{:url('create')}")'>新增</a>-->
+                    </nav>
+                    <!-- /.card-header -->
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>获得佣金</th>
+                            <th>剩余佣金</th>
+                            <th>更新时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {volist name="info" id="vo"}
+                        <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.total}</td>
+                            <td>{$vo.balance}</td>
+                            <td>{$vo.update_time}</td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick='confirmDel("{:url('del',"id=$vo[id]")}")'>删除</a>
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <div class="pagelist" style="width: 40%;margin: 0 auto"> {$page}</div>
+</div>
+{include file="common/foot" /}

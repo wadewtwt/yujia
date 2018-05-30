@@ -100,6 +100,39 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="javascript:;" class="nav-link">
+                            <i class="nav-icon fa fa-edit"></i>
+                            <p>
+                                账户管理
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{:url('credit/index','sid=7')}" class="nav-link {if condition="input('param.sid') eq 7"}active{/if}">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>绑定银行卡</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{:url('account/index','sid=8')}" class="nav-link {if condition="input('param.sid') eq 8"}active{/if}">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>佣金管理</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{:url('withdrawRecord/index','sid=9')}" class="nav-link {if condition="input('param.sid') eq 9"}active{/if}">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>提现管理</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

@@ -16,7 +16,7 @@ function userEncrypt($data){
     return md5($data.$str);
 }
 
-// 返回json信息
+// 后台返回json信息
 function returnJson($res,$title='修改'){
     if($res){
         echo json_encode(array('err_msg'=>$title.'成功','err_code'=>200,'success'=>'success'));
@@ -25,4 +25,15 @@ function returnJson($res,$title='修改'){
         echo json_encode(array('err_msg'=>$title.'失败','err_code'=>200,'success'=>'error'));
         exit();
     }
+}
+
+// 前端返回json到前端
+// 200
+function jsonReturn($code=200,$msg='成功',$data=''){
+    $json = [
+        'code' => $code,
+        'msg' => $msg,
+        'data' => $data,
+    ];
+    return json_encode($json);
 }

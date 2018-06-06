@@ -33,14 +33,14 @@ class Upload extends Controller {
         echo $imgUrl;
 	}
 
-	 //多图上传
+	 //多图上传(没有)
     public function uploadinfo(){
        $img=getUpload("scommodity");
        if ($img) {
            echo json_encode(array('code'=>0,'msg'=>'上传成功！','data'=>$img));
        }
     }
-    //图片删除
+    //图片删除(没有)
     public function imgdel(){
     	$id=$_GET['imgid'];
     	$rs=M("img")->where("id=$id")->delete();

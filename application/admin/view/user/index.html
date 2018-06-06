@@ -63,7 +63,7 @@
                             <td>{$vo.phone}</td>
                             <td>{if condition="$vo.recommend eq 1"}是{else/}否{/if}</td>
                             <td>
-                                <a href="javascript:;" class="btn btn-sm btn-primary" onClick='layer_show("修改","{:url('update_password',"id=$vo[id]")}")'>修改密码</a>
+                                <!--<a href="javascript:;" class="btn btn-sm btn-primary" onClick='layer_show("修改","{:url('update_password',"id=$vo[id]")}")'>修改密码</a>-->
                                 <a href="javascript:;" class="btn btn-sm btn-default" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>编辑</a>
                                 {if condition="$vo['status'] eq 0"}
                                 <a href="javascript:;" class="btn btn-sm btn-danger" onClick='layer_show("修改","{:url('update',"id=$vo[id]")}")'>禁用</a>

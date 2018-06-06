@@ -243,9 +243,9 @@ return [
     ],
     // 七牛云
     'qiniu' => [
-        'accesskey' => 'HeIFg7K5mySVpKTX1vfhko70qS-7dDrVHsU3LuC0',
-        'secretkey' => 'OZBKRi6xDxLmiq0IIjuZV_tr-UXUNyPqZpsasfh_',
-        'bucket' => 'moreshine',
-        'domain'=>'http://p11bmws2p.bkt.clouddn.com',
+    'accesskey' => 'tP-wH11RSkaXh9VPaarQjkwFrUEHzmVqM_l-cAM1',
+    'secretkey' => 'RIwjYtrGrsFhlHZQ1B68r2-kb3uqdu-dH0jIKW1_',
+    'bucket' => 'yujia',
+    'domain'=>'http://p9w547w7t.bkt.clouddn.com',
     ]
 ];

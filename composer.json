@@ -18,7 +18,8 @@
     "require": {
         "php": ">=5.4.0",
         "topthink/framework": "5.0.*",
-        "gmars/tp5-qiniu": "dev-master"
+        "gmars/tp5-qiniu": "dev-master",
+        "endroid/qrcode": "^2.5"
     },
     "autoload": {
         "psr-4": {

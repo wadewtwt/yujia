@@ -28,12 +28,12 @@ function returnJson($res,$title='修改'){
 }
 
 // 前端返回json到前端
-// 200
 function jsonReturn($code=200,$msg='成功',$data=''){
     $json = [
         'code' => $code,
         'msg' => $msg,
         'data' => $data,
     ];
+
     return json_encode($json);
 }

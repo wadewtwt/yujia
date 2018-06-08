@@ -44,6 +44,7 @@ class CommonModel extends Model
         return $imgUrl;
     }
 
+    // 根据openid得到用户的id
     public static function getUserId($openId){
         $userId = db('user')
             ->where(['openid'=>$openId])

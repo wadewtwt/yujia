@@ -5,17 +5,17 @@ use app\api\model\CommonModel;
 use think\Controller;
 use think\Db;
 
-class Education extends Controller
+class Honor extends Controller
 {
     // 根据用户的openid得到该用户的教育背景列表
-    public function getEducation(){
+    public function getHonor(){
         $openId = input('openid');
         $commonModel = new CommonModel();
         $userId = $commonModel::getUserId($openId);
         $userId = $userId['id'];
-        $info = db('education')
+        $info = db('Honor')
             ->where(['user_id'=>$userId])
-            ->order('end_time desc')
+            ->order('time desc')
             ->select();
         if ($info) {
             return jsonReturn(CommonModel::CODE_200, CommonModel::MSG_200, $info);
@@ -25,9 +25,9 @@ class Education extends Controller
     }
 
     // 得到详细教育背景
-    public function getEducationDetail(){
+    public function getHonorDetail(){
         $id = input('id');
-        $info = db('education')
+        $info = db('Honor')
             ->where(['id'=>$id])
             ->select();
         if ($info) {
@@ -38,7 +38,7 @@ class Education extends Controller
     }
 
     // 修改教育背景
-    public function updateEducation(){
+    public function updateHonor(){
 
         $id = input('id');
         $openId = input('openid');
@@ -49,19 +49,15 @@ class Education extends Controller
         $where['user_id'] = $userId;
 
         // 凑成修改数组
-        $college = input('college')?:'';
-        if($college){
-            $data['college'] = $college;
+        $title = input('title')?:'';
+        if($title){
+            $data['title'] = $title;
         }
-        $major = input('major');
-        if($major){
-            $data['major'] = $major;
-        }
-        $data['begin_time'] = input('begin_time');
-        $data['end_time'] = input('end_time');
-        $data['education'] = input('education');
 
-        $res = db('education')
+        $data['time'] = input('time');
+        $data['pic'] = input('pic');
+        $data['create_time'] = date('Y-m-d H:i:s');
+        $res = db('Honor')
             ->where($where)
             ->update($data);
 
@@ -73,7 +69,7 @@ class Education extends Controller
     }
 
     // 删除该条教育背景
-    public function delEducation(){
+    public function delHonor(){
         // 组成查找条件
         $id = input('id');
         $openId = input('openid');
@@ -83,7 +79,7 @@ class Education extends Controller
         $where['id'] = $id;
         $where['user_id'] = $userId;
 
-        $res = db('education')
+        $res = db('Honor')
             ->where($where)
             ->delete();
         if ($res) {
@@ -94,20 +90,19 @@ class Education extends Controller
     }
 
     // 添加教育背景
-    public function addEducation(){
+    public function addHonor(){
+
         // 凑足条件
         $openId = input('openid');
         $commonModel = new CommonModel();
         $userId = $commonModel::getUserId($openId);
         $userId = $userId['id'];
         $data['user_id'] = $userId;
-        $data['college'] = input('college');
-        $data['major'] = input('major');
-        $data['begin_time'] = input('begin_time');
-        $data['end_time'] = input('end_time');
-        $data['education'] = input('education');
+        $data['title'] = input('title');
+        $data['time'] = input('time');
+        $data['pic'] = input('pic');
         $data['create_time'] = date('Y-m-d H:i:s');
-        $res = db('education')
+        $res = db('Honor')
             ->insert($data);
 
         if ($res) {

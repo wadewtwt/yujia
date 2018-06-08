@@ -33,6 +33,21 @@ class Upload extends Controller {
         echo $imgUrl;
 	}
 
+    // 小程序获取uptoken
+    public function uptoken(){
+        // 读取配置
+        $qiniuConfig = Config::get('qiniu');
+        Vendor('gmars.tp5-qiniu.qiniu_driver.autoload');
+        // 初始化签权对象
+        $auth = new Auth($qiniuConfig['accesskey'], $qiniuConfig['secretkey']);
+        // 生成上传Token
+        $token = $auth->uploadToken($qiniuConfig['bucket']);
+        $info = [
+            'uptoken' => $token
+        ];
+        return json_encode($info);
+    }
+
 	 //多图上传(没有)
     public function uploadinfo(){
        $img=getUpload("scommodity");

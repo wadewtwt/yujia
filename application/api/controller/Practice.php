@@ -5,15 +5,15 @@ use app\api\model\CommonModel;
 use think\Controller;
 use think\Db;
 
-class Education extends Controller
+class Practice extends Controller
 {
     // 根据用户的openid得到该用户的教育背景列表
-    public function getEducation(){
+    public function getPractice(){
         $openId = input('openid');
         $commonModel = new CommonModel();
         $userId = $commonModel::getUserId($openId);
         $userId = $userId['id'];
-        $info = db('education')
+        $info = db('practice')
             ->where(['user_id'=>$userId])
             ->order('end_time desc')
             ->select();
@@ -25,9 +25,9 @@ class Education extends Controller
     }
 
     // 得到详细教育背景
-    public function getEducationDetail(){
+    public function getPracticeDetail(){
         $id = input('id');
-        $info = db('education')
+        $info = db('practice')
             ->where(['id'=>$id])
             ->select();
         if ($info) {
@@ -38,7 +38,7 @@ class Education extends Controller
     }
 
     // 修改教育背景
-    public function updateEducation(){
+    public function updatePractice(){
 
         $id = input('id');
         $openId = input('openid');
@@ -49,19 +49,18 @@ class Education extends Controller
         $where['user_id'] = $userId;
 
         // 凑成修改数组
-        $college = input('college')?:'';
-        if($college){
-            $data['college'] = $college;
+        $company = input('company')?:'';
+        if($company){
+            $data['company'] = $company;
         }
-        $major = input('major');
-        if($major){
-            $data['major'] = $major;
+        $position = input('position');
+        if($position){
+            $data['position'] = $position;
         }
         $data['begin_time'] = input('begin_time');
         $data['end_time'] = input('end_time');
-        $data['education'] = input('education');
 
-        $res = db('education')
+        $res = db('practice')
             ->where($where)
             ->update($data);
 
@@ -73,7 +72,7 @@ class Education extends Controller
     }
 
     // 删除该条教育背景
-    public function delEducation(){
+    public function delPractice(){
         // 组成查找条件
         $id = input('id');
         $openId = input('openid');
@@ -83,7 +82,7 @@ class Education extends Controller
         $where['id'] = $id;
         $where['user_id'] = $userId;
 
-        $res = db('education')
+        $res = db('practice')
             ->where($where)
             ->delete();
         if ($res) {
@@ -94,20 +93,20 @@ class Education extends Controller
     }
 
     // 添加教育背景
-    public function addEducation(){
+    public function addPractice(){
+
         // 凑足条件
         $openId = input('openid');
         $commonModel = new CommonModel();
         $userId = $commonModel::getUserId($openId);
         $userId = $userId['id'];
         $data['user_id'] = $userId;
-        $data['college'] = input('college');
-        $data['major'] = input('major');
+        $data['company'] = input('company');
+        $data['position'] = input('position');
         $data['begin_time'] = input('begin_time');
         $data['end_time'] = input('end_time');
-        $data['education'] = input('education');
         $data['create_time'] = date('Y-m-d H:i:s');
-        $res = db('education')
+        $res = db('practice')
             ->insert($data);
 
         if ($res) {
